@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="download-slices__scales ten-checkbox-group" size="small">
+  <div>
+    <label class="ten-checkbox">
+      <span class="ten-checkbox__checkbox">
+        <input type="checkbox" value="1">
+        <span class="ten-checkbox__checkbox-inner"></span>
+      </span>
+      <span>Web @1x</span>
+      <small>100px x 100px</small>
+    </label><br><br>
+  </div>
+
+  <div>
+    <label class="ten-checkbox"><span class="ten-checkbox__checkbox">
+        <input type="checkbox" value="2"><span
+            class="ten-checkbox__checkbox-inner"></span></span><span>Web @2x</span><small>200px x
+      200px</small></label><br><br>
+  </div>
+</div>
+<button onclick="handleClick()" >click</button>
+</body>
+<script>
+  function showToast() {
+
+  }
+
+  function handleClick() {
+    const doms = document.querySelectorAll('.download-slices__scales .ten-checkbox input');
+    let targetDom = null
+    const checkValues = [];
+
+    doms.forEach((item) => {
+      if (item.checked) {
+        targetDom = item
+        checkValues.push(item.value);
+      }
+    })
+
+    if (!checkValues.length) {
+      alert('请勾选上传图片');
+      return;
+    }
+
+    if (checkValues.length > 1) {
+      alert('一次只能上传一张图片');
+      return;
+    }
+
+    const sizeStr = targetDom.parentElement.parentElement.querySelector('small').innerText.replace(/px|\s+/g, '')
+
+    fetch('url', () => {
+      // 上传链接写入粘贴板
+      // 提示上传成功
+    })
+  }
+
+</script>
+</html>

@@ -1,0 +1,22 @@
+.zhenai__upload-btn {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 20px;
+  font-size: 14px;
+  padding: 0 16px;
+  height: 34px;
+  line-height: 32px;
+  text-align: center;
+  color: #fff;
+  background: #e13fc0;
+}
+
+
+.zhenai__toast {
+  font-size: 16px;
+  color: #67c23a;
+  background: #f0f9eb;
+  padding: 15px 20px;
+  border: 1px solid #e1f3d8;
+  border-radius: 4px;
+}

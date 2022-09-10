@@ -1,0 +1,16 @@
+{
+  "name": "UploadImageCodesign",
+  "version": "1.0.0",
+  "description": "Codesign 图片上传扩展",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "https://codesign.qq.com/s/6ym7ZRXAb39AYED/6W3G0mgkoGjlOwL"
+      ],
+      "js": ["src/index.js"],
+      "css": ["src/index.css"],
+      "run_at": "document_start"
+    }
+  ]
+}

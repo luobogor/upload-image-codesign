@@ -1,5 +1,20 @@
 function showToast() {
+  const toastDom = document.createElement('div')
+  toastDom.setAttribute('class', 'zhenai__toast')
+  toastDom.innerHTML = '上传成功'
+  document.body.appendChild(toastDom)
 
+  setTimeout(() => {
+    toastDom.classList.add('zhenai-animate__fadein')
+  }, 0)
+
+  setTimeout(() => {
+    toastDom.classList.remove('zhenai-animate__fadein')
+    toastDom.classList.add('zhenai-animate__fadeout')
+    setTimeout(() => {
+      document.body.removeChild(toastDom)
+    }, 1000)
+  }, 3000)
 }
 
 function insertAfter(referenceNode, newNode) {
@@ -54,7 +69,6 @@ function handleClickUploadBtn() {
 
   console.log('finalImageUrl:', finalImageUrl)
   showToast('finalImageUrl:' + finalImageUrl)
-
   // TODO
   // fetch('url', () => {
   //   // 上传链接写入粘贴板
@@ -79,7 +93,7 @@ window.addEventListener('click', function handleClickLayer(evt) {
 
   uploadBtn.id = 'zaUploadBtn'
   uploadBtn.setAttribute('class', 'zhenai__upload-btn')
-  uploadBtn.innerHTML = '上传图片'
+  uploadBtn.innerHTML = '上传当前切图'
   uploadBtn.addEventListener('click', handleClickUploadBtn)
 
   insertAfter(downloadBtn, uploadBtn)

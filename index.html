@@ -3,82 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <link rel="stylesheet" href="./src/index.css">
 </head>
 <body>
-<div class="download-slices__scales ten-checkbox-group" size="small">
-  <div>
-    <label class="ten-checkbox">
-      <span class="ten-checkbox__checkbox">
-        <input type="checkbox" value="1">
-        <span class="ten-checkbox__checkbox-inner"></span>
-      </span>
-      <span>Web @1x</span>
-      <small>100px x 100px</small>
-    </label><br><br>
-  </div>
-
-  <div>
-    <label class="ten-checkbox"><span class="ten-checkbox__checkbox">
-        <input type="checkbox" value="2"><span
-            class="ten-checkbox__checkbox-inner"></span></span><span>Web @2x</span><small>200px x
-      200px</small></label><br><br>
-  </div>
-</div>
-<button onclick="handleClick()" >click</button>
+<!--<button onclick="handleClick()" >click</button>-->
 </body>
 <script>
-  function showToast() {
 
-  }
 
-  function handleClick() {
-    const doms = document.querySelectorAll('.download-slices__scales .ten-checkbox input');
-    let targetDom = null
-    const checkValues = [];
-
-    doms.forEach((item) => {
-      if (item.checked) {
-        targetDom = item
-        checkValues.push(item.value);
-      }
-    })
-
-    if (!checkValues.length) {
-      alert('请勾选上传图片');
-      return;
-    }
-
-    if (checkValues.length > 1) {
-      alert('一次只能上传一张图片');
-      return;
-    }
-
-    // https://cdn3.codesign.qq.com/dcloud/attachments/2022/04/24/2867be21a0825945b010454984f99409-o.png?imageMogr2/thumbnail/700x650/interlace/1
-    const imageSrc = document.querySelector('.node-box__content .thumb img').getAttribute('src')
-    const rawImageSrc = imageSrc.slice('?imageMogr2')[0]
-
-    // https://cdn3.codesign.qq.com/dcloud/attachments/2022/04/24/feb9a55daeb3a6ce77df056e370967f1-o.png?imageMogr2/thumbnail/200x200/quality/40/format/webp
-    const thumbnail = targetDom.parentElement.parentElement.querySelector('small').innerText.replace(/px|\s+/g, '')
-    const qualityText = document.querySelector('.download-slices .download-slices__item .ten-input__input-input').value
-    const matcher = qualityText.match(/\d+/g, '')
-    const format = document.querySelector('.download-slices .download-slices__type .ten-input__input-input').value.trim()
-
-    const imageParams = [
-      `thumbnail/${thumbnail}`,
-      `matcher/${matcher ? matcher[0] : 100}`,
-      `format/${format}`,
-    ].join('/')
-
-    const finalImageUrl = `${rawImageSrc}?imageMogr2/${imageParams}`
-
-    console.log('finalImageUrl:', finalImageUrl)
-
-    // TODO
-    // fetch('url', () => {
-    //   // 上传链接写入粘贴板
-    //   // 提示上传成功
-    // });
-  }
-
+  setTimeout(() => {
+    showToast()
+  }, 100)
 </script>
 </html>

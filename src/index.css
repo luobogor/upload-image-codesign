@@ -13,10 +13,24 @@
 
 
 .zhenai__toast {
-  font-size: 16px;
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
   color: #67c23a;
   background: #f0f9eb;
   padding: 15px 20px;
   border: 1px solid #e1f3d8;
   border-radius: 4px;
+  opacity: 0;
+  transition: 1s opacity;
+}
+
+.zhenai-animate__fadeout {
+  opacity: 0;
+}
+
+.zhenai-animate__fadein {
+  opacity: 1;
 }

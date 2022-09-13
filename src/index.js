@@ -1,100 +1,12 @@
-function showToast() {
-  const toastDom = document.createElement('div')
-  toastDom.setAttribute('class', 'zhenai__toast')
-  toastDom.innerHTML = '上传成功'
-  document.body.appendChild(toastDom)
+const container = document.getElementById('uploadImageChecker')
+const uploadImageCheckerInput = document.getElementById('uploadImageCheckerInput')
 
-  setTimeout(() => {
-    toastDom.classList.add('zhenai-animate__fadein')
-  }, 0)
+container.addEventListener('click', () => {
+  uploadImageCheckerInput.checked = !uploadImageCheckerInput.checked
+  chrome.storage.sync.set({ ZA_CODESIGN_COMPRESS: uploadImageCheckerInput.checked ? '1' : '0' })
+});
 
-  setTimeout(() => {
-    toastDom.classList.remove('zhenai-animate__fadein')
-    toastDom.classList.add('zhenai-animate__fadeout')
-    setTimeout(() => {
-      document.body.removeChild(toastDom)
-    }, 1000)
-  }, 3000)
-}
-
-function insertAfter(referenceNode, newNode) {
-  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-}
-
-function handleClickUploadBtn() {
-  const checkerDoms = document.querySelectorAll('.download-slices__scales .ten-checkbox input');
-  let targetDom = null
-  const checkValues = [];
-
-  checkerDoms.forEach((item) => {
-    if (item.checked) {
-      targetDom = item
-      checkValues.push(item.value);
-    }
-  })
-
-  if (!checkValues.length) {
-    alert('请勾选上传图片');
-    return;
-  }
-
-  if (checkValues.length > 1) {
-    alert('一次只能上传一张图片');
-    return;
-  }
-
-  // https://cdn3.codesign.qq.com/dcloud/attachments/2022/04/24/2867be21a0825945b010454984f99409-o.png?imageMogr2/thumbnail/700x650/interlace/1
-  const imageSrc = document.querySelector('.node-box__content .thumb img').getAttribute('src')
-  const rawImageSrc = imageSrc.split('?imageMogr2')[0]
-
-  // https://cdn3.codesign.qq.com/dcloud/attachments/2022/04/24/feb9a55daeb3a6ce77df056e370967f1-o.png?imageMogr2/thumbnail/200x200/quality/40/format/webp
-  const thumbnail = targetDom.parentElement.parentElement.querySelector('small')
-    .innerText
-    .replace(/px|\s+/g, '')
-  const qualityMatcher = document.querySelector('.download-slices .download-slices__quality .ten-input__input-input')
-    .value
-    .match(/\d+/g, '')
-  const quality = qualityMatcher ? qualityMatcher[0] : 100;
-  const format = document.querySelector('.download-slices .download-slices__format .ten-input__input-input')
-    .value
-    .toLowerCase()
-
-  const imageParams = [
-    `thumbnail/${ thumbnail }`,
-    `quality/${ quality }`,
-    `format/${ format }`,
-  ].join('/')
-
-  const finalImageUrl = `${ rawImageSrc }?imageMogr2/${ imageParams }`
-
-  console.log('finalImageUrl:', finalImageUrl)
-  showToast('finalImageUrl:' + finalImageUrl)
-  // TODO
-  // fetch('url', () => {
-  //   // 上传链接写入粘贴板
-  //   // 提示上传成功
-  // });
-}
-
-window.addEventListener('click', function handleClickLayer(evt) {
-  const uploadBtnDom = document.querySelector('#zaUploadBtn')
-
-  if (uploadBtnDom) {
-    return
-  }
-
-  const downloadBtn = document.querySelector('.download-slices__confirm-button')
-
-  if (!downloadBtn) {
-    return
-  }
-
-  const uploadBtn = document.createElement('div')
-
-  uploadBtn.id = 'zaUploadBtn'
-  uploadBtn.setAttribute('class', 'zhenai__upload-btn')
-  uploadBtn.innerHTML = '上传当前切图'
-  uploadBtn.addEventListener('click', handleClickUploadBtn)
-
-  insertAfter(downloadBtn, uploadBtn)
+uploadImageCheckerInput.addEventListener('click', (evt) => {
+  evt.stopPropagation()
+  chrome.storage.sync.set({ ZA_CODESIGN_COMPRESS: evt.target.checked ? '1' : '0' })
 })

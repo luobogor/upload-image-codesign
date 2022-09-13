@@ -1,15 +1,27 @@
 {
-  "name": "UploadImageCodesign",
+  "name": "Codesign Image Uploader",
   "version": "1.0.0",
-  "description": "Codesign 图片上传扩展",
-  "manifest_version": 2,
+  "description": "Codesign 切图上传至珍爱 COS",
+  "manifest_version": 3,
+  "permissions": ["storage", "activeTab", "scripting"],
+  "action": {
+    "default_icon": "logo.png",
+    "default_title": "Codesign 切图上传",
+    "default_popup": "src/index.html"
+  },
+  "icons": {
+    "16": "logo.png",
+    "32": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
   "content_scripts": [
     {
       "matches": [
-        "https://codesign.qq.com/s/6ym7ZRXAb39AYED/6W3G0mgkoGjlOwL"
+        "https://codesign.qq.com/s/*/*"
       ],
-      "js": ["src/index.js"],
-      "css": ["src/index.css"],
+      "js": ["src/upload-image/index.js"],
+      "css": ["src/upload-image/index.css"],
       "run_at": "document_start"
     }
   ]
